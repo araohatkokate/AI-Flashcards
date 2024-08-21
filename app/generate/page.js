@@ -1,7 +1,7 @@
 'use client'
 
 import { useUser } from "@clerk/nextjs"
-import { Box, Paper, TextField } from "@mui/material"
+import { Box, Button, CardActionArea, CardContent, Paper, TextField } from "@mui/material"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -99,7 +99,49 @@ export default function Generate(){
                     mb: 2,
                 }}
                 />
+                <Button
+                variant = "contained"
+                color = "primary"
+                onClick = {handleSubmit}
+                fulWidth
+                >
+                    {' '}
+                    Submit
+                </Button>
             </Paper>
         </Box>
+
+        {flashcards.length > 0 && (
+            <Box sx = {{mt: 4}}>
+                <Typography variant = "h5">Flashcards Preview</Typography>
+                <Grid container spacing = {3}>
+                    {flashcards.map((flashcard, index)=>(
+                        <Grid item xs = {12} sm = {6} md = {4} key = {index}>
+                            <CardActionArea
+                                onClick={() => {
+                                    handleCardClick(index)
+                                }}
+                                >
+                                    <CardContent>
+                                        <Box>
+                                            <div>
+                                                <div>
+                                                    <Typography variant = "h5" component = "div">
+                                                        {flashcard.front}
+                                                    </Typography>
+                                                </div>
+                                                <div>
+                                                    <Typography variant = "h5" component = "div">
+                                                        {flashcard.back}
+                                                    </Typography>
+                                                </div>
+                                            </div>
+                                        </Box>
+                                    </CardContent>
+                                </CardActionArea>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>)}
     </Container>
 } 

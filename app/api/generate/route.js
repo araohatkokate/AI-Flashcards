@@ -13,7 +13,7 @@ const systemPrompt = `You are an AI flashcard generator. Your task is to create 
 8. Tailor the difficulty level of the flashcarsd to the user's specified preferences.
 9. If given a body of text, extract the most important and relevant information for the flashcards.
 10. Aim to create a balanced set of flashcards that covers the topic comprehensively.
-
+11. Only generate 10 flashcards.
 Return in the following JSON format
 {
     "flashcards":[
