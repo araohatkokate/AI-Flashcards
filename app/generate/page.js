@@ -2,18 +2,18 @@
 
 import { useUser } from "@clerk/nextjs"
 import { db } from "@/firebase"
-import { Box, Button, Card, CardActionArea, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper, TextField, Typography } from "@mui/material"
+import { Box, Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper, TextField, Typography } from "@mui/material"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { doc, collection, setDoc, getDoc, writeBatch } from 'firebase/firestore';
 
 export default function Generate(){
-    const  {isLoaded, isSignedIn, user} = useUser()
+    const {isLoaded, isSignedIn, user} = useUser()
     const [flashcards, setFlashcards] = useState([])
     const [flipped, setFlipped] = useState([])
     const [text, setText] = useState('')
     const [name, setName] = useState('')
-    const [open, setOpen] = useState('')
+    const [open, setOpen] = useState(false)
     const router = useRouter()
 
     const handleSubmit = async () =>{
@@ -21,7 +21,8 @@ export default function Generate(){
             method: 'POST',
             body: text,          
         })
-        .then((res)=>res.json()).then((data) => setFlashcards(data))
+        .then((res) => res.json())
+        .then((data) => setFlashcards(data))
     }
 
     const handleCardClick = (id) =>{
@@ -105,7 +106,7 @@ export default function Generate(){
                 variant = "contained"
                 color = "primary"
                 onClick = {handleSubmit}
-                fulWidth
+                fullWidth
                 >
                     {' '}
                     Submit
